@@ -413,6 +413,134 @@
     color: var(--text-muted);
   }
 
+  /* How to Use Section */
+  .howto-section {
+    margin-bottom: 80px;
+  }
+  .howto-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .howto-tab {
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .howto-tab:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+  }
+  .howto-tab.active {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+    color: var(--cyan);
+  }
+  .howto-panel {
+    display: none;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+  }
+  .howto-panel.active {
+    display: block;
+  }
+  .howto-panel h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .howto-panel .howto-file {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .howto-step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+  .howto-step-num {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    color: var(--cyan);
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .howto-step-content h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .howto-step-content p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .howto-code {
+    margin-top: 8px;
+    padding: 12px 16px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--green);
+    overflow-x: auto;
+    white-space: pre;
+    line-height: 1.7;
+  }
+  .howto-code .comment { color: var(--text-muted); }
+  .howto-code .cmd { color: var(--cyan); }
+  .howto-examples {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .howto-examples h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .howto-example {
+    padding: 12px 16px;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .howto-example .prompt {
+    font-size: 13px;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .howto-example .response {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
   /* Modal */
   .modal-overlay {
     display: none;
@@ -668,6 +796,270 @@
   <div class="section-subtitle">Every agent is available as a native skill on all 6 major AI coding platforms. Copy one file and you're live.</div>
 
   <div class="platforms-grid" id="platformsGrid"></div>
+
+  <!-- How to Use -->
+  <section class="howto-section">
+    <div class="section-title">How to Use</div>
+    <div class="section-subtitle">Pick your platform. One command to install. Agents activate automatically.</div>
+
+    <div class="howto-tabs">
+      <div class="howto-tab active" onclick="showTab('claude')">Claude Code</div>
+      <div class="howto-tab" onclick="showTab('codex')">Codex</div>
+      <div class="howto-tab" onclick="showTab('cursor')">Cursor</div>
+      <div class="howto-tab" onclick="showTab('copilot')">Copilot</div>
+      <div class="howto-tab" onclick="showTab('antigravity')">Antigravity</div>
+      <div class="howto-tab" onclick="showTab('openclaw')">OpenClaw</div>
+    </div>
+
+    <!-- Claude Code -->
+    <div class="howto-panel active" id="panel-claude">
+      <h3>Claude Code</h3>
+      <div class="howto-file">Config: CLAUDE.md &middot; 170 lines &middot; Auto-loads on session start</div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">1</div>
+        <div class="howto-step-content">
+          <h4>Install</h4>
+          <p>Copy CLAUDE.md to your project root (per-project) or ~/.claude/ (global).</p>
+          <div class="howto-code"><span class="comment"># Per-project</span>
+<span class="cmd">cp platforms/claude-code/CLAUDE.md your-project/CLAUDE.md</span>
+
+<span class="comment"># Global (all projects)</span>
+<span class="cmd">mkdir -p ~/.claude/agents/ && cp *.md ~/.claude/agents/</span></div>
+        </div>
+      </div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">2</div>
+        <div class="howto-step-content">
+          <h4>Use</h4>
+          <p>Just start working. Agents activate automatically based on your task. No commands or prefixes needed.</p>
+        </div>
+      </div>
+
+      <div class="howto-examples">
+        <h4>Example Prompts</h4>
+        <div class="howto-example">
+          <div class="prompt">"Design a microservices architecture for payments"</div>
+          <div class="response">&rarr; ATLAS (architecture) + SENTINEL (security) + FORGE (infra)</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">"Write a PRD for our onboarding flow"</div>
+          <div class="response">&rarr; PULSE (product) + PIXEL (UX) + ORACLE (research)</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">"Run this project from discovery to launch"</div>
+          <div class="response">&rarr; ZEUS (Phase 0-6 lifecycle, all agents coordinated)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Codex -->
+    <div class="howto-panel" id="panel-codex">
+      <h3>OpenAI Codex</h3>
+      <div class="howto-file">Config: AGENTS.md &middot; 55 lines &middot; Read before every task</div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">1</div>
+        <div class="howto-step-content">
+          <h4>Install</h4>
+          <p>Copy AGENTS.md to your project root or ~/.codex/ for global defaults.</p>
+          <div class="howto-code"><span class="comment"># Per-project</span>
+<span class="cmd">cp platforms/codex/AGENTS.md your-project/AGENTS.md</span>
+
+<span class="comment"># Global</span>
+<span class="cmd">mkdir -p ~/.codex/ && cp platforms/codex/AGENTS.md ~/.codex/</span></div>
+        </div>
+      </div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">2</div>
+        <div class="howto-step-content">
+          <h4>Use</h4>
+          <p>Codex reads AGENTS.md automatically. Use invocation keywords from each agent's definition.</p>
+        </div>
+      </div>
+
+      <div class="howto-examples">
+        <h4>Example Prompts</h4>
+        <div class="howto-example">
+          <div class="prompt">codex "build a REST API with auth and rate limiting"</div>
+          <div class="response">&rarr; ATLAS (build) + SENTINEL (auth)</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">codex "test this module with TDD"</div>
+          <div class="response">&rarr; TITAN (test, TDD)</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">codex "automate Slack &rarr; Notion &rarr; HubSpot workflow"</div>
+          <div class="response">&rarr; HERMES (automate, integrate)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cursor -->
+    <div class="howto-panel" id="panel-cursor">
+      <h3>Cursor IDE</h3>
+      <div class="howto-file">Config: .cursorrules + .cursor/rules/*.mdc &middot; 147 lines &middot; Persistent context</div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">1</div>
+        <div class="howto-step-content">
+          <h4>Install</h4>
+          <p>Copy rules to your project root. Both legacy and modern formats provided.</p>
+          <div class="howto-code"><span class="comment"># Legacy (single file)</span>
+<span class="cmd">cp platforms/cursor/.cursorrules your-project/.cursorrules</span>
+
+<span class="comment"># Modern (glob patterns, recommended)</span>
+<span class="cmd">mkdir -p your-project/.cursor/rules</span>
+<span class="cmd">cp platforms/cursor/.cursor/rules/*.mdc your-project/.cursor/rules/</span></div>
+        </div>
+      </div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">2</div>
+        <div class="howto-step-content">
+          <h4>Use</h4>
+          <p>Rules inject automatically into every Cmd+K, Chat, and Composer interaction.</p>
+        </div>
+      </div>
+
+      <div class="howto-examples">
+        <h4>Example Prompts</h4>
+        <div class="howto-example">
+          <div class="prompt">Cmd+K: "Refactor this to event sourcing"</div>
+          <div class="response">&rarr; ATLAS (event sourcing/CQRS expertise)</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">Chat: "Is this code vulnerable to injection?"</div>
+          <div class="response">&rarr; SENTINEL (OWASP, injection testing)</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">Composer: "Full-stack dashboard with charts and tests"</div>
+          <div class="response">&rarr; ATLAS (code) + PIXEL (design) + TITAN (tests)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copilot -->
+    <div class="howto-panel" id="panel-copilot">
+      <h3>GitHub Copilot</h3>
+      <div class="howto-file">Config: .github/copilot-instructions.md &middot; 54 lines &middot; Chat + completions + Agent Mode</div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">1</div>
+        <div class="howto-step-content">
+          <h4>Install</h4>
+          <p>Copy to your repo's .github/ directory. Works in VS Code, JetBrains, and GitHub.com.</p>
+          <div class="howto-code"><span class="cmd">mkdir -p your-project/.github</span>
+<span class="cmd">cp platforms/copilot/.github/copilot-instructions.md your-project/.github/</span></div>
+        </div>
+      </div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">2</div>
+        <div class="howto-step-content">
+          <h4>Use</h4>
+          <p>Copilot reads instructions automatically for Chat, code completions, PR reviews, and Agent Mode.</p>
+        </div>
+      </div>
+
+      <div class="howto-examples">
+        <h4>Example Prompts</h4>
+        <div class="howto-example">
+          <div class="prompt">Copilot Chat: "How should we architect this feature?"</div>
+          <div class="response">&rarr; ATLAS + ZEUS activate</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">Copilot Chat: "Review this PR for security issues"</div>
+          <div class="response">&rarr; SENTINEL + TITAN activate</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">Agent Mode: "Set up CI/CD with canary deploys"</div>
+          <div class="response">&rarr; FORGE (CI/CD, canary, monitoring)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Antigravity -->
+    <div class="howto-panel" id="panel-antigravity">
+      <h3>Google Antigravity</h3>
+      <div class="howto-file">Config: .gemini/GEMINI.md &middot; 80 lines &middot; Multi-agent parallel execution</div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">1</div>
+        <div class="howto-step-content">
+          <h4>Install</h4>
+          <p>Copy GEMINI.md to your project's .gemini/ directory.</p>
+          <div class="howto-code"><span class="cmd">mkdir -p your-project/.gemini</span>
+<span class="cmd">cp platforms/antigravity/.gemini/GEMINI.md your-project/.gemini/</span></div>
+        </div>
+      </div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">2</div>
+        <div class="howto-step-content">
+          <h4>Use</h4>
+          <p>Antigravity reads GEMINI.md at session start. Trigger keywords activate agents automatically. Supports parallel multi-agent execution.</p>
+        </div>
+      </div>
+
+      <div class="howto-examples">
+        <h4>Example Prompts</h4>
+        <div class="howto-example">
+          <div class="prompt">"Research competitors in AI coding space"</div>
+          <div class="response">&rarr; ORACLE (research, competitive analysis)</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">"Build a RAG pipeline with hybrid search"</div>
+          <div class="response">&rarr; NEXUS (RAG, AI engineering)</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">"Design an accessible onboarding flow"</div>
+          <div class="response">&rarr; PIXEL (design, accessibility) + PULSE (product)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OpenClaw -->
+    <div class="howto-panel" id="panel-openclaw">
+      <h3>OpenClaw</h3>
+      <div class="howto-file">Config: 10 &times; SKILL.md &middot; 542 lines &middot; WhatsApp, Slack, Discord, Telegram, Signal</div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">1</div>
+        <div class="howto-step-content">
+          <h4>Install</h4>
+          <p>Copy all 10 skill folders to your OpenClaw skills directory.</p>
+          <div class="howto-code"><span class="cmd">cp -r platforms/openclaw/skills/* ~/.openclaw/skills/</span></div>
+        </div>
+      </div>
+
+      <div class="howto-step">
+        <div class="howto-step-num">2</div>
+        <div class="howto-step-content">
+          <h4>Use</h4>
+          <p>Skills auto-trigger based on keywords in any connected messaging platform. Each agent is a separate skill with YAML frontmatter.</p>
+        </div>
+      </div>
+
+      <div class="howto-examples">
+        <h4>Example Prompts (Any Messaging Platform)</h4>
+        <div class="howto-example">
+          <div class="prompt">WhatsApp: "Plan our Q2 product launch"</div>
+          <div class="response">&rarr; zeus-orchestrator + pulse-growth activate</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">Slack: "Deploy the new version to staging"</div>
+          <div class="response">&rarr; forge-devops activates</div>
+        </div>
+        <div class="howto-example">
+          <div class="prompt">Discord: "What's trending in spatial computing?"</div>
+          <div class="response">&rarr; oracle-research activates</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Workflow -->
   <section class="workflow">
@@ -1015,6 +1407,14 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal
 function closeModal() {
   modal.classList.remove('active');
   document.body.style.overflow = '';
+}
+
+// How-to tabs
+function showTab(id) {
+  document.querySelectorAll('.howto-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.howto-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.target.classList.add('active');
 }
 </script>
 

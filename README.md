@@ -155,17 +155,191 @@ ZEUS activates LOKI mode
 
 ---
 
-## Installation (Claude Code)
+## Deploy to All 6 Platforms
 
-Copy to your Claude Code agents directory:
+Every agent works as a native skill on 6 major AI coding platforms. One copy command and you're live.
+
+### 1. Claude Code — `CLAUDE.md`
+
+Claude Code reads `CLAUDE.md` automatically at session start. All 10 agents activate based on your task.
 
 ```bash
+# Per-project (recommended)
+cp platforms/claude-code/CLAUDE.md /path/to/your-project/CLAUDE.md
+
+# Global (all projects)
+mkdir -p ~/.claude/agents/
 cp "Kazi's Agents Army"/*.md ~/.claude/agents/
 ```
 
-Verify:
+**How to use**: Just start coding. Ask Claude Code to "plan a project" (ZEUS activates), "build an API" (ATLAS activates), "audit security" (SENTINEL activates). No extra setup needed.
+
+```
+> claude "Design a microservices architecture for our payment system"
+  → ATLAS activates (architecture) + SENTINEL (security) + FORGE (infrastructure)
+
+> claude "Write a PRD for our new onboarding flow"
+  → PULSE activates (product) + PIXEL (UX) + ORACLE (research)
+```
+
+---
+
+### 2. OpenAI Codex — `AGENTS.md`
+
+Codex reads `AGENTS.md` before every task. Uses invocation keywords to route to the right agent.
+
 ```bash
-ls ~/.claude/agents/ | grep -E "ZEUS|ATLAS|SENTINEL|FORGE|NEXUS|PIXEL|PULSE|TITAN|HERMES|ORACLE"
+# Per-project
+cp platforms/codex/AGENTS.md /path/to/your-project/AGENTS.md
+
+# Global (all projects)
+mkdir -p ~/.codex/
+cp platforms/codex/AGENTS.md ~/.codex/AGENTS.md
+```
+
+**How to use**: Codex automatically reads the file. Use agent keywords in your prompts:
+
+```
+codex "build a REST API with auth and rate limiting"
+  → ATLAS (build) + SENTINEL (auth)
+
+codex "test this module with TDD"
+  → TITAN (test, TDD)
+
+codex "automate our Slack → Notion → HubSpot workflow"
+  → HERMES (automate, integrate)
+```
+
+---
+
+### 3. Cursor — `.cursorrules` + `.cursor/rules/*.mdc`
+
+Cursor injects rules as persistent context into every AI interaction. Both legacy and modern formats provided.
+
+```bash
+# Legacy format (single file — works everywhere)
+cp platforms/cursor/.cursorrules /path/to/your-project/.cursorrules
+
+# Modern format (recommended — supports glob patterns)
+mkdir -p /path/to/your-project/.cursor/rules
+cp platforms/cursor/.cursor/rules/kazis-agents-army.mdc /path/to/your-project/.cursor/rules/
+```
+
+**How to use**: Rules load automatically in Cursor IDE. Every Cmd+K, Chat, or Composer interaction uses the agents:
+
+```
+Cmd+K: "Refactor this to use event sourcing"
+  → ATLAS activates (event sourcing/CQRS expertise)
+
+Chat: "Is this code vulnerable to injection attacks?"
+  → SENTINEL activates (OWASP, injection testing)
+
+Composer: "Create a full-stack dashboard with charts"
+  → ATLAS (code) + PIXEL (design) + TITAN (tests)
+```
+
+---
+
+### 4. GitHub Copilot — `.github/copilot-instructions.md`
+
+Copilot reads `copilot-instructions.md` for all AI interactions — Chat, completions, reviews, and Agent Mode.
+
+```bash
+mkdir -p /path/to/your-project/.github
+cp platforms/copilot/.github/copilot-instructions.md /path/to/your-project/.github/
+```
+
+**How to use**: Works in VS Code, JetBrains, and GitHub.com automatically:
+
+```
+Copilot Chat: "How should we architect this feature?"
+  → ATLAS + ZEUS activate
+
+Copilot Chat: "Review this PR for security issues"
+  → SENTINEL + TITAN activate
+
+Agent Mode: "Set up CI/CD with staging and canary deploys"
+  → FORGE activates (CI/CD, canary, monitoring)
+```
+
+---
+
+### 5. Google Antigravity — `.gemini/GEMINI.md`
+
+Antigravity reads `GEMINI.md` at session start. Supports multi-agent parallel execution.
+
+```bash
+mkdir -p /path/to/your-project/.gemini
+cp platforms/antigravity/.gemini/GEMINI.md /path/to/your-project/.gemini/
+```
+
+**How to use**: Agent triggers activate automatically based on task keywords:
+
+```
+"Research competitors in the AI coding space"
+  → ORACLE activates (research, competitive analysis)
+
+"Build a RAG pipeline with hybrid search"
+  → NEXUS activates (RAG, AI engineering)
+
+"Design an accessible onboarding flow"
+  → PIXEL (design, accessibility) + PULSE (product)
+```
+
+---
+
+### 6. OpenClaw — 10 × `SKILL.md`
+
+Each agent is a separate skill with YAML frontmatter. Auto-triggers on keyword match across WhatsApp, Slack, Discord, Telegram, Signal.
+
+```bash
+# Copy all 10 skills
+cp -r platforms/openclaw/skills/* ~/.openclaw/skills/
+```
+
+**How to use**: Skills trigger automatically in any connected messaging platform:
+
+```
+WhatsApp: "Plan our Q2 product launch"
+  → zeus-orchestrator + pulse-growth activate
+
+Slack: "Deploy the new version to staging"
+  → forge-devops activates
+
+Discord: "What's trending in spatial computing?"
+  → oracle-research activates
+```
+
+---
+
+### Universal Setup (All 6 Platforms at Once)
+
+```bash
+PROJECT_ROOT="/path/to/your-project"
+
+# 1. Claude Code
+cp platforms/claude-code/CLAUDE.md "$PROJECT_ROOT/"
+
+# 2. OpenAI Codex
+cp platforms/codex/AGENTS.md "$PROJECT_ROOT/"
+
+# 3. Cursor
+cp platforms/cursor/.cursorrules "$PROJECT_ROOT/"
+mkdir -p "$PROJECT_ROOT/.cursor/rules"
+cp platforms/cursor/.cursor/rules/*.mdc "$PROJECT_ROOT/.cursor/rules/"
+
+# 4. GitHub Copilot
+mkdir -p "$PROJECT_ROOT/.github"
+cp platforms/copilot/.github/copilot-instructions.md "$PROJECT_ROOT/.github/"
+
+# 5. Google Antigravity
+mkdir -p "$PROJECT_ROOT/.gemini"
+cp platforms/antigravity/.gemini/GEMINI.md "$PROJECT_ROOT/.gemini/"
+
+# 6. OpenClaw (user-level — works globally)
+cp -r platforms/openclaw/skills/* ~/.openclaw/skills/
+
+echo "All 6 platforms configured with Kazi's Agents Army!"
 ```
 
 ---
@@ -175,6 +349,9 @@ ls ~/.claude/agents/ | grep -E "ZEUS|ATLAS|SENTINEL|FORGE|NEXUS|PIXEL|PULSE|TITA
 | Metric | Value |
 |--------|-------|
 | Agents | 10 |
+| Platforms Supported | 6 (Claude Code, Codex, Cursor, Copilot, Antigravity, OpenClaw) |
+| Platform Config Files | 17 |
+| Total Lines (Agents + Platforms) | 6,202 |
 | Source Agents Synthesized | 700+ |
 | Source Skills Absorbed | 860+ |
 | Source Platforms Scanned | 11 |
@@ -187,5 +364,18 @@ ls ~/.claude/agents/ | grep -E "ZEUS|ATLAS|SENTINEL|FORGE|NEXUS|PIXEL|PULSE|TITA
 
 ---
 
+## Platform Config Files
+
+| Platform | Config File | Lines | Format |
+|----------|------------|-------|--------|
+| Claude Code | `CLAUDE.md` | 170 | Markdown with agent definitions |
+| OpenAI Codex | `AGENTS.md` | 55 | Markdown with invocation keywords |
+| Cursor | `.cursorrules` + `.mdc` | 147 | Rules with triggers |
+| GitHub Copilot | `copilot-instructions.md` | 54 | Markdown instructions |
+| Google Antigravity | `GEMINI.md` | 80 | Markdown with trigger keywords |
+| OpenClaw | 10 × `SKILL.md` | 542 | YAML frontmatter + markdown |
+
+---
+
 *Kazi's Agents Army v2 — Built by Kazi (mk-knight23) · March 2026*
-*Synthesizes 700+ agents, 860+ skills, 11 platforms, plus 2026 industry research into 10 elite agents.*
+*10 elite agents · 6 platforms · Synthesized from 700+ agents, 860+ skills, 11 platforms + 2026 research*
